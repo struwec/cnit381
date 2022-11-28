@@ -75,7 +75,7 @@ def ligma(incoming_msg):
     # Create a Response object and craft a reply in Markdown.
     response = Response()
            
-    response.markdown += "Whats Ligma?"
+    response.markdown = "Whats Ligma?"
     return response
 
 def sys_info(incoming_msg):
