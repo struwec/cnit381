@@ -4,7 +4,7 @@ from webexteamsbot.models import Response
 import json
 import requests
 
-teams_token = 'NjExMDQ2N2EtMDA3ZS00ZTM4LTg4ZmYtMTE3NGUzMzQ1MzhjYmE2ZDdkNWYtY2Jj_P0A1_5d96674f-de50-43d7-ae6b-8071b71cb457'
+teams_token = 'NDBjMWEwZWUtMTNhMS00YTgwLTk4MjQtY2RjYWVlZDdjZTRiN2FjNzRiNTYtYjVh_P0A1_b34062fa-24f1-480f-a815-05d10d8cf4f2'
 
 def do_something(incoming_msg):
     """
