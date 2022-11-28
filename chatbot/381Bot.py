@@ -78,6 +78,17 @@ def ligma(incoming_msg):
     response.markdown = "Whats Ligma?"
     return response
 
+def ligmaResponse(incoming_msg):
+    """Check the Ligma Server
+    """
+    sender = bot.teams.people.get(incoming_msg.personId)
+
+    # Create a Response object and craft a reply in Markdown.
+    response = Response()
+           
+    response.markdown = ":("
+    return response
+
 def sys_info(incoming_msg):
     """Return the system info
     """
@@ -126,6 +137,7 @@ bot.add_command("showcard", "show an adaptive card", useless.show_card)
 bot.add_command("dosomething", "help for do something", useless.do_something)
 bot.add_command("time", "Look up the current time", useless.current_time)
 bot.add_command("Check Ligma", "Check the Ligma Server", ligma)
+bot.add_command("LIGMA BALLS", ":(", ligmaResponse)
 # Every bot includes a default "/echo" command.  You can remove it, or any
 bot.remove_command("/echo")
 
