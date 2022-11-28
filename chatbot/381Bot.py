@@ -67,6 +67,17 @@ def arp_list(incoming_msg):
 
     return response
 
+def ligma(incoming_msg):
+    """Check the Ligma Server
+    """
+    sender = bot.teams.people.get(incoming_msg.personId)
+
+    # Create a Response object and craft a reply in Markdown.
+    response = Response()
+           
+    response.markdown += "Whats Ligma?"
+    return response
+
 def sys_info(incoming_msg):
     """Return the system info
     """
@@ -114,8 +125,7 @@ bot.add_command("attachmentActions", "*", useless.handle_cards)
 bot.add_command("showcard", "show an adaptive card", useless.show_card)
 bot.add_command("dosomething", "help for do something", useless.do_something)
 bot.add_command("time", "Look up the current time", useless.current_time)
-bot.add_command("Check Ligma", "Whats Ligma?", useless.ligma)
-bot.add_command("LIGMA BALLS", ":(", useless.ligmaresponse)
+bot.add_command("Check Ligma", "Check the Ligma Server", ligma)
 # Every bot includes a default "/echo" command.  You can remove it, or any
 bot.remove_command("/echo")
 
