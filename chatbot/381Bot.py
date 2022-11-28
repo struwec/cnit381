@@ -18,9 +18,9 @@ headers = {'Content-Type': 'application/yang-data+json',
            'Accept': 'application/yang-data+json'}
 
 # Bot Details
-bot_email = 'netintern@webex.bot'
-teams_token = 'NDYxY2QwNDctOGZkYy00OWNmLWIxODktMzNjMjdhMDlhNzBhNjk3YzRlMTAtOWI0_P0A1_b34062fa-24f1-480f-a815-05d10d8cf4f2'
-bot_url = "https://0bc4-68-190-134-141.ngrok.io"
+bot_email = '381bot11@webex.bot'
+teams_token = 'NDBjMWEwZWUtMTNhMS00YTgwLTk4MjQtY2RjYWVlZDdjZTRiN2FjNzRiNTYtYjVh_P0A1_b34062fa-24f1-480f-a815-05d10d8cf4f2'
+bot_url = "https://df4e-96-41-242-188.ngrok.io/"
 bot_app_name = 'CNIT-381 Network Auto Chat Bot'
 
 # Create a Bot Object
@@ -44,7 +44,7 @@ def greeting(incoming_msg):
 
     # Create a Response object and craft a reply in Markdown.
     response = Response()
-    response.markdown = "Hello {}, I'm a friendly CSR1100v assistant .  ".format(
+    response.markdown = "Hello {}, I'm a friendly NetIntern .  ".format(
         sender.firstName
     )
     response.markdown += "\n\nSee what I can do by asking for **/help**."
