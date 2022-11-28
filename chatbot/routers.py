@@ -1,4 +1,11 @@
-router = {"host":"192.168.56.101",
+router = {"host":"172.16.0.1",
+            "port":"830",
+            "username":"cisco",
+            "password":"cisco123!",
+            "hostkey_verify":"False"
+        }
+
+router2 = {"host":"172.16.0.2",
             "port":"830",
             "username":"cisco",
             "password":"cisco123!",
