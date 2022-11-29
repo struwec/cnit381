@@ -1,15 +1,32 @@
+import threading
+import time
+import json
+import requests
+import os
+import yaml
+
 ### teams Bot ###
 from webexteamsbot import TeamsBot
 from webexteamsbot.models import Response
+
 ### Utilities Libraries
 import routers
 import useless_skills as useless
 import useful_skills as useful
+from BGP_Establish import BGP_Neighbors_Eastablished
+from Monitor_int import MonitorInterfaces
 
 # Router Info 
 device_address = routers.router['host']
 device_username = routers.router['username']
 device_password = routers.router['password']
+
+### Table building ###
+from tabulate import tabulate
+
+# Make Thread list
+threads = list()
+exit_flag = False # Exit flag for threads
 
 # RESTCONF Setup
 port = '443'
@@ -120,6 +137,137 @@ def get_int_ips(incoming_msg):
                                 intf["ietf-ip:ipv4"]["address"][0]["netmask"])
         except KeyError:
             response.markdown +="IP Address: UNCONFIGURED\n"
+    return response
+
+def loopback(incoming_msg):
+    response = Response()
+    os.system('ansible-playbook -i ./inventory Loopbacks.yaml')
+    os.system('ansible-playbook -i ./inventory1 Loopbacks1.yaml')
+    response.text = "The interfaces have been created"
+    return response
+
+def check_bgp(incoming_msg):
+    """Return BGP Status
+    """
+    response = Response()
+    response.text = "Gathering BGP Information from BGP peers...\n\n"
+
+    bgp = BGP_Neighbors_Established()
+    status = bgp.setup('testbed/routers.yml')
+    if status != "":
+        response.text += status
+        return response
+
+    status = bgp.learn_bgp()
+    if status != "":
+        response.text += status
+
+    response.text += bgp.check_bgp()
+
+    return response
+
+def check_int(incoming_msg):
+    """Find down interfaces
+    """
+    response = Response()
+    response.text = "Gathering  Information...\n\n"
+
+    mon = MonitorInterfaces()
+    status = mon.setup('testbed/routers.yml')
+    if status != "":
+        response.text += status
+        return response
+
+    status = mon.learn_interface()
+    if status == "":
+        response.text += "All Interfaces are OK!"
+    else:
+        response.text += status
+
+    return response
+
+def monitor_int(incoming_msg):
+    """Monitor interfaces in a thread
+    """
+    response = Response()
+    response.text = "Monitoring interfaces...\n\n"
+    monitor_int_job(incoming_msg)
+    th = threading.Thread(target=monitor_int_job, args=(incoming_msg,))
+    threads.append(th)  # appending the thread to the list
+
+    # starting the threads
+    for th in threads:
+        th.start()
+
+    # waiting for the threads to finish
+    for th in threads:
+        th.join()
+
+    return response
+
+def monitor_int_job(incoming_msg):
+    response = Response()
+    msgtxt_old=""
+    global exit_flag
+    while exit_flag == False:
+        msgtxt = check_int(incoming_msg)
+        if msgtxt_old != msgtxt:
+            print(msgtxt.text)
+            useless.create_message(incoming_msg.roomId, msgtxt.text)
+        msgtxt_old = msgtxt
+        time.sleep(20)
+
+    print("exited thread")
+    exit_flag = False
+
+    return response
+
+def monitor_bgp_job(incoming_msg):
+    response = Response()
+    msgtxt_old=""
+    global exit_flag
+    while exit_flag == False:
+        msgtxt = check_bgp(incoming_msg)
+        if msgtxt_old != msgtxt:
+            print(msgtxt.text)
+            useless.create_message(incoming_msg.roomId, msgtxt.text)
+        msgtxt_old = msgtxt
+        time.sleep(20)
+
+    print("exited thread")
+    exit_flag = False
+
+    return response
+
+def stop_monitor(incoming_msg):
+    """Monitor interfaces in a thread
+    """
+    response = Response()
+    response.text = "Stopping all Monitors...\n\n"
+    global exit_flag
+    exit_flag = True
+    time.sleep(5)
+    response.text += "Done!..\n\n"
+
+    return response
+
+def monitor_bgp(incoming_msg):
+    """Monitor interfaces in a thread
+    """
+    response = Response()
+    response.text = "Monitoring bgp...\n\n"
+    monitor_bgp_job(incoming_msg)
+    th = threading.Thread(target=monitor_bgp_job, args=(incoming_msg,))
+    threads.append(th)  # appending the thread to the list
+
+    # starting the threads
+    for th in threads:
+        th.start()
+
+    # waiting for the threads to finish
+    for th in threads:
+        th.join()
+
     return response
 
 # Set the bot greeting.
