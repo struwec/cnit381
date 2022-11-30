@@ -17,9 +17,9 @@ from BGP_Establish import BGP_Neighbors_Established
 from Monitor_int import MonitorInterfaces
 
 # Router Info 
-device_address = routers.router['host']
-device_username = routers.router['username']
-device_password = routers.router['password']
+device_address = routers.router1['host']
+device_username = routers.router1['username']
+device_password = routers.router1['password']
 
 ### Table building ###
 from tabulate import tabulate
@@ -286,6 +286,7 @@ bot.add_command("dosomething", "help for do something", useless.do_something)
 bot.add_command("time", "Look up the current time", useless.current_time)
 bot.add_command("Check Ligma", "Check the Ligma Server", ligma)
 bot.add_command("LIGMA BALLS", ":(", ligmaResponse)
+
 # Every bot includes a default "/echo" command.  You can remove it, or any
 bot.remove_command("/echo")
 
