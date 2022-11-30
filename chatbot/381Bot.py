@@ -13,7 +13,7 @@ from webexteamsbot.models import Response
 import routers
 import useless_skills as useless
 import useful_skills as useful
-from BGP_Establish import BGP_Neighbors_Eastablished
+from BGP_Establish import BGP_Neighbors_Established
 from Monitor_int import MonitorInterfaces
 
 # Router Info 
