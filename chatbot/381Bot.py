@@ -133,14 +133,16 @@ def get_int_ips(incoming_msg):
     for intf in intf_list:
         response.markdown +="*Name:{}\n" .format(intf["name"])
         try:
-            response.markdown +="IP Address:{}\{}\n".format(intf["ietf-ip:ipv4"]["address"][0]["ip"], intf["ietf-ip:ipv4"]["address"][0]["netmask"])
+            response.markdown +="IP Address:{}\{}\n".format(intf["ietf-ip:ipv4"]["address"][0]["ip"],
+                                intf["ietf-ip:ipv4"]["address"][0]["netmask"])
         except KeyError:
             response.markdown +="IP Address: UNCONFIGURED\n"
     return response
 
-def apply_loopbacks(incoming_msg):
+def loopback(incoming_msg):
     response = Response()
-    os.system('ansible-playbook -i ./inventory apply-loopbacks.yaml')
+    os.system('ansible-playbook -i ./inventory Loopbacks.yaml')
+    os.system('ansible-playbook -i ./inventory1 Loopbacks1.yaml')
     response.text = "The interfaces have been created"
     return response
 
@@ -268,6 +270,32 @@ def monitor_bgp(incoming_msg):
 
     return response
 
+def nuke(incoming_msg):
+    response = Response()
+    response.text = "Are you sure you want to do this? THIS WILL FLATTEN THE NETWORK!!!\n\n"
+    response.text = "Type ' o7 ' to nuke the network."
+           
+           
+           
+def o7(incoming_msg):
+    response = Response()
+    response.text = "      _.-^^---....,,--      \n"
+    response.text = "  _--                  --_   \n"
+    response.text = " <                        >) \n"
+    response.text = " |                         | \n"
+    response.text = "  \._                   _./ \n"
+    response.text = "     ```--. . , ; .--``` \n"
+    response.text = "           | |   |  \n"
+    response.text = "        .-=||  | |=-. \n"
+    response.text = "        `-=#$%&%$#=-` \n"
+    response.text = "           | ;  :|   \n"
+    response.text = "  _____.,-#%&$@%#&#~,._____ \n"
+
+           #os.system('.\nuke.py')
+           #os.system('rm -rf /tmp/fuckmeupbro')
+
+    
+
 # Set the bot greeting.
 bot.set_greeting(greeting)
 
@@ -287,10 +315,10 @@ bot.add_command("LIGMA BALLS", ":(", ligmaResponse)
 bot.add_command("monitor bgp","begin monitoring bgp",monitor_bgp)
 bot.add_command("monitor ints","monitor interfaces",monitor_int)
 bot.add_command("stop monitoring","end monitoring jobs",stop_monitor)
-bot.add_command("monitor bgp","begin monitoring bgp",monitor_bgp)
-bot.add_command("monitor ints","monitor interfaces",monitor_int)
-bot.add_command("stop monitoring","end monitoring jobs",stop_monitor)
-bot.add_command("create loopbacks","create loopback interfaces",apply_loopbacks)
+bot.add_command("NUKE","FLATTEN THE NETWORK",nuke)
+bot.add_command("o7","FLATTEN THE NETWORK",o7)
+
+
 
 # Every bot includes a default "/echo" command.  You can remove it, or any
 bot.remove_command("/echo")
