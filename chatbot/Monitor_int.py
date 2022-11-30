@@ -54,4 +54,4 @@ if __name__ == "__main__":
     mon = MonitorInterfaces()
     mon.setup('testbed/routers.yml')
     intfl = mon.learn_interface()
-    print(intfl
+    print(intfl)
