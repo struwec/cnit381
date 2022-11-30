@@ -1,5 +1,6 @@
 [routers]
 router1 ansible_host=172.16.0.1
+router2 ansible_host=172.16.0.2
 
 
 [routers:vars]

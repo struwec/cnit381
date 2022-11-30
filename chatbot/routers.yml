@@ -6,10 +6,10 @@ devices:
         protocol: ssh
     credentials:
       default:
-        password: '%ENC{w5PDosOUw5fDosKQwpbCmMKH}'
+        password: 'cisco123!'
         username: cisco
       enable:
-        password: '%ENC{w5PDosOUw5fDosKQwpbCmMKH}'
+        password: 'cisco123!'
     os: iosxe
     type: iosxe
   R2:
@@ -19,9 +19,9 @@ devices:
         protocol: ssh
     credentials:
       default:
-        password: '%ENC{w5PDosOUw5fDosKQwpbCmMKH}'
+        password: 'cisco123!'
         username: cisco
       enable:
-        password: '%ENC{w5PDosOUw5fDosKQwpbCmMKH}'
+        password: 'cisco123!'
     os: iosxe
     type: iosxe
