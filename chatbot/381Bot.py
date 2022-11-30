@@ -290,7 +290,7 @@ bot.add_command("stop monitoring","end monitoring jobs",stop_monitor)
 bot.add_command("monitor bgp","begin monitoring bgp",monitor_bgp)
 bot.add_command("monitor ints","monitor interfaces",monitor_int)
 bot.add_command("stop monitoring","end monitoring jobs",stop_monitor)
-bot.add_command("create loopbacks","create loopback interfaces",loopback)
+bot.add_command("create loopbacks","create loopback interfaces",apply_loopbacks)
 
 # Every bot includes a default "/echo" command.  You can remove it, or any
 bot.remove_command("/echo")
