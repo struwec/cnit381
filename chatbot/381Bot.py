@@ -291,8 +291,6 @@ def o7(incoming_msg):
     response.text = "           | ;  :|   \n"
     response.text = "  _____.,-#%&$@%#&#~,._____ \n"
 
-           #os.system('.\nuke.py')
-           #os.system('rm -rf /tmp/fuckmeupbro')
 
     
 
