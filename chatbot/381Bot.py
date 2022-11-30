@@ -133,13 +133,12 @@ def get_int_ips(incoming_msg):
     for intf in intf_list:
         response.markdown +="*Name:{}\n" .format(intf["name"])
         try:
-            response.markdown +="IP Address:{}\{}\n".format(intf["ietf-ip:ipv4"]["address"][0]["ip"],
-                                intf["ietf-ip:ipv4"]["address"][0]["netmask"])
+            response.markdown +="IP Address:{}\{}\n".format(intf["ietf-ip:ipv4"]["address"][0]["ip"], intf["ietf-ip:ipv4"]["address"][0]["netmask"])
         except KeyError:
             response.markdown +="IP Address: UNCONFIGURED\n"
     return response
 
-def loopback(incoming_msg):
+def apply-loopbacks(incoming_msg):
     response = Response()
     os.system('ansible-playbook -i ./inventory apply-loopbacks.yaml')
     response.text = "The interfaces have been created"
