@@ -1,0 +1,17 @@
+---
+  - name: Add lo# interfaces
+    hosts: routers
+    gather_facts: false
+    connection: network_cli
+  
+    tasks:
+      - name: Loopback Interface Configuration
+        ios_config:
+           lines:
+             - ip address 10.{{ item }}.221.{{ router.id }} 255.255.255.0
+           parents: 
+             - int lo{{ item }}
+        loop:
+          - 0
+          - 1
+          - 2
