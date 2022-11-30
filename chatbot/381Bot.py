@@ -138,7 +138,7 @@ def get_int_ips(incoming_msg):
             response.markdown +="IP Address: UNCONFIGURED\n"
     return response
 
-def apply-loopbacks(incoming_msg):
+def apply_loopbacks(incoming_msg):
     response = Response()
     os.system('ansible-playbook -i ./inventory apply-loopbacks.yaml')
     response.text = "The interfaces have been created"
