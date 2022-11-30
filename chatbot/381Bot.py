@@ -273,23 +273,26 @@ def monitor_bgp(incoming_msg):
 def nuke(incoming_msg):
     response = Response()
     response.text = "Are you sure you want to do this? THIS WILL FLATTEN THE NETWORK!!!\n\n"
-    response.text = "Type ' o7 ' to nuke the network."
-           
+    response.text += "Type ' o7 ' to nuke the network."
+    
+    return response
            
            
 def o7(incoming_msg):
     response = Response()
-    response.text = "      _.-^^---....,,--      \n"
-    response.text = "  _--                  --_   \n"
-    response.text = " <                        >) \n"
-    response.text = " |                         | \n"
-    response.text = "  \._                   _./ \n"
-    response.text = "     ```--. . , ; .--``` \n"
-    response.text = "           | |   |  \n"
-    response.text = "        .-=||  | |=-. \n"
-    response.text = "        `-=#$%&%$#=-` \n"
-    response.text = "           | ;  :|   \n"
-    response.text = "  _____.,-#%&$@%#&#~,._____ \n"
+    response.text += "      _.-^^---....,,--      \n"
+    response.text += "  _--                  --_   \n"
+    response.text += " <                        >) \n"
+    response.text += " |                         | \n"
+    response.text += "  \._                   _./ \n"
+    response.text += "     ```--. . , ; .--``` \n"
+    response.text += "           | |   |  \n"
+    response.text += "        .-=||  | |=-. \n"
+    response.text += "        `-=#$%&%$#=-` \n"
+    response.text += "           | ;  :|   \n"
+    response.text += "  _____.,-#%&$@%#&#~,._____ \n"
+           
+    return response
 
 
     
