@@ -141,8 +141,7 @@ def get_int_ips(incoming_msg):
 
 def loopback(incoming_msg):
     response = Response()
-    os.system('ansible-playbook -i ./inventory Loopbacks.yaml')
-    os.system('ansible-playbook -i ./inventory1 Loopbacks1.yaml')
+    os.system('ansible-playbook -i ./inventory apply-loopbacks.yaml')
     response.text = "The interfaces have been created"
     return response
 
